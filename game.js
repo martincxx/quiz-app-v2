@@ -22,7 +22,7 @@ fetch(
   .then((loadedQuestions) => {
     questions = loadedQuestions.results.map((loadedQuestion) => {
       const formattedQuestion = {
-        question: loadedQuestion.question,
+        question: convertHTML(loadedQuestion.question),
       };
 
       const answerChoices = [...loadedQuestion.incorrect_answers];
@@ -47,6 +47,12 @@ fetch(
 //CONSTANTS
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 5;
+
+convertHTML = (str) => {
+  var txt = document.createElement("textarea");
+  txt.innerHTML = str;
+  return txt.value;
+};
 
 startGame = () => {
   questionCounter = 0;
